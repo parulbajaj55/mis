@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Student.Management.System.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Student.Management.System.Infrastructure.Data;
 namespace Student.Management.System.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230111080409_ForeignKeyConstraint")]
+    partial class ForeignKeyConstraint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,17 +62,17 @@ namespace Student.Management.System.Infrastructure.Migrations
 
             modelBuilder.Entity("Student.Management.System.Domain.Entities.Subject", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SubjectId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubjectId"));
 
                     b.Property<string>("SubjectName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SubjectId");
 
                     b.ToTable("Subjects");
                 });
@@ -77,17 +80,12 @@ namespace Student.Management.System.Infrastructure.Migrations
             modelBuilder.Entity("Student.Management.System.Domain.Entities.Stud", b =>
                 {
                     b.HasOne("Student.Management.System.Domain.Entities.Subject", "FavouriteSubject")
-                        .WithMany("Students")
+                        .WithMany()
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("FavouriteSubject");
-                });
-
-            modelBuilder.Entity("Student.Management.System.Domain.Entities.Subject", b =>
-                {
-                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

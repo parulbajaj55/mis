@@ -9,5 +9,6 @@ namespace Student.Management.System.Domain.Entities
     {
         public int Id  { get; set; }
         public string SubjectName { get; set; } = string.Empty;
+        public List<Stud>? Students { get; set; }
     }
 }
