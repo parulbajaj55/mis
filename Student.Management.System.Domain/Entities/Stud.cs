@@ -12,8 +12,8 @@ namespace Student.Management.System.Domain.Entities
         public string LastName { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;
 
-        public DateOnly DateOfBirth { get; set; }
-        public Subject? FavSubject { get; set; } 
+        public DateTime DateOfBirth { get; set; }
+        public Subject? FavouriteSubject { get; set; } 
 
     }
 }

@@ -2,7 +2,7 @@ namespace Student.Management.System.Domain.Entities
 {
     public class WeatherForecast
     {
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
 
         public string? Summary { get; set; }
 
