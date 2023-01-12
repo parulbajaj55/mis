@@ -16,7 +16,7 @@ namespace Student.Management.System.Application.Services
             _studentRepository = studentRepository;
         }
 
-        public async Task<List<Stud>> GetAllStudents()
+        public async Task<IEnumerable<StudentDetails>> GetAllStudents()
         {
             return await _studentRepository.GetAllStudents();
         }

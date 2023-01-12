@@ -26,7 +26,7 @@ namespace Student.Management.System.WebAPI.Controllers
         // }
         
         [HttpGet]
-        public async Task<ActionResult<List<Stud>>> GetAll(){
+        public async Task<ActionResult<List<StudentDetails>>> GetAll(){
             return Ok(await _studentService.GetAllStudents());
         }
     }

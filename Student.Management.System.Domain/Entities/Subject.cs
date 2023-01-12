@@ -9,6 +9,7 @@ namespace Student.Management.System.Domain.Entities
     {
         public int SubjectId  { get; set; }
         public string SubjectName { get; set; } = string.Empty;
-        public List<Stud>? Students { get; set; }
+        public ICollection<StudentDetails> Students {get; set;}
+    
     }
 }

@@ -18,10 +18,21 @@ namespace Student.Management.System.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<List<Stud>> GetAllStudents()
+        public async Task<IEnumerable<StudentDetails>> GetAllStudents()
         {
-            var students = await _context.Students.ToListAsync();
-            return students;
+            // var students = await _context.Students.ToListAsync();
+            // return students;
+            //return context.Students.Include("Subject").ToList();
+
+            return _context.Students.Select(s => new StudentDetails{
+                FirstName = s.FirstName,
+                MiddleName = s.MiddleName, 
+                LastName = s.LastName, 
+                DateOfBirth = s.DateOfBirth,
+                Id = s.Id,
+                SubjectId = s.SubjectId,
+                Subject = new Subject{SubjectName = s.Subject.SubjectName, SubjectId = s.Subject.SubjectId}
+            }).ToList();
         }
 
     }

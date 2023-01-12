@@ -14,7 +14,7 @@ namespace Student.Management.System.Infrastructure.Data
             
         }  
 
-        public DbSet<Stud> Students => Set<Stud>();
+        public DbSet<StudentDetails> Students => Set<StudentDetails>();
         public DbSet<Subject> Subjects => Set<Subject>();
     }
 }

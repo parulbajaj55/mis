@@ -8,6 +8,6 @@ namespace Student.Management.System.Application.Services
 {
     public interface IStudentService
     {
-        public Task<List<Stud>> GetAllStudents();
+        public Task<IEnumerable<StudentDetails>> GetAllStudents();
     }
 }

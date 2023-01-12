@@ -8,6 +8,6 @@ namespace Student.Management.System.Application.Ports.Out
 {
     public interface IStudentRepository
     {
-        public Task<List<Stud>> GetAllStudents();
+        public Task<IEnumerable<StudentDetails>> GetAllStudents();
     }
 }
