@@ -4,7 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Student.Management.System.Application.Services;
+using Student.Management.System.Domain.Dtos.Student;
 using Student.Management.System.Domain.Entities;
+
+// GetAllStudents() - done
+// AddStudent(Student) -done
+// UpdateStudentDetails(Student)
+// RemoveStudent(Id)
+// RemoveStudents(Ids)
+// FilterStudent(SubjectId)
 
 namespace Student.Management.System.WebAPI.Controllers
 {
@@ -26,8 +34,19 @@ namespace Student.Management.System.WebAPI.Controllers
         // }
         
         [HttpGet]
-        public async Task<ActionResult<List<StudentDetails>>> GetAll(){
+        public async Task<ActionResult<List<GetStudentDto>>> GetAll(){
             return Ok(await _studentService.GetAllStudents());
         }
+
+        [HttpPost]
+        public async Task<ActionResult<List<GetStudentDto>>> AddStudent(AddStudentDto newStudent){
+            return Ok(await _studentService.AddStudent(newStudent));
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<List<GetStudentDto>>> RemoveStudent(int id){
+            return Ok(await _studentService.RemoveStudent(id));
+        }
+        
     }
 }
