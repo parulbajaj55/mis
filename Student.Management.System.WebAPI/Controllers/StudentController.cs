@@ -43,15 +43,22 @@ namespace Student.Management.System.WebAPI.Controllers
             return Ok(await _studentService.AddStudent(newStudent));
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<List<GetStudentDto>>> RemoveStudent(int id){
             return Ok(await _studentService.RemoveStudent(id));
         }
         
-    //    [HttpDelete]
-    //     public async Task<ActionResult<List<GetStudentDto>>> RemoveStudent(List<int> ids){
+       [HttpDelete]
+        public async Task<ActionResult<List<GetStudentDto>>> RemoveStudent(List<int> ids){
 
-    //         return Ok(await _studentService.RemoveStudent(id));
-    //     }
+                IEnumerable<GetStudentDto> studentList;
+                for(int i =0; i<ids.Capacity ;i++){
+                 studentList = await _studentService.RemoveStudent(ids.ElementAt(i));
+                }
+           //List<GetStudentDto> studentlist = ids.ForEach(id => _studentService.RemoveStudent(id));
+            return Ok( studentList);
+        }
+
+
     }
 }
