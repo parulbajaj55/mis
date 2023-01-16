@@ -48,5 +48,10 @@ namespace Student.Management.System.WebAPI.Controllers
             return Ok(await _studentService.RemoveStudent(id));
         }
         
+    //    [HttpDelete]
+    //     public async Task<ActionResult<List<GetStudentDto>>> RemoveStudent(List<int> ids){
+
+    //         return Ok(await _studentService.RemoveStudent(id));
+    //     }
     }
 }

@@ -33,6 +33,7 @@ namespace Student.Management.System.Application.Services
 
         public async Task<IEnumerable<GetStudentDto>> RemoveStudent(int id)
         {
+            
             return await _studentRepository.RemoveStudent(id);
         }
     }
