@@ -13,9 +13,10 @@ namespace Student.Management.System.Infrastructure
 
         public AutoMapperProfile()
         {
-        CreateMap<StudentDetails,GetStudentDto>();
-        CreateMap<AddStudentDto,StudentDetails>();
-        CreateMap<UpdateStudentDto,StudentDetails>();
+            CreateMap<StudentDetails,GetStudentDto>();
+            CreateMap<AddStudentDto,StudentDetails>();
+            CreateMap<UpdateStudentDto,StudentDetails>();
+            CreateMap<HashSet<StudentDetails>,GetStudentDto>();
         }
     }
 }
