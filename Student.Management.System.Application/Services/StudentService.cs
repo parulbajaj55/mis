@@ -36,5 +36,10 @@ namespace Student.Management.System.Application.Services
             
             return await _studentRepository.RemoveStudent(id);
         }
+
+        public async Task<GetStudentDto> UpdateStudent(UpdateStudentDto updatedStudent)
+        {
+            return await _studentRepository.UpdateStudent(updatedStudent);
+        }
     }
 }

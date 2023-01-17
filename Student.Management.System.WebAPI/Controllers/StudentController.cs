@@ -56,10 +56,19 @@ namespace Student.Management.System.WebAPI.Controllers
                 for(int i =0; i<ids.Count ;i++){
                     studentList = await _studentService.RemoveStudent(ids.ElementAt(i));
                 }
-           //List<GetStudentDto> studentlist = ids.ForEach(id => _studentService.RemoveStudent(id));
+           
             return Ok(studentList);
         }
 
+        [HttpPut]
+        public async Task<ActionResult<List<GetStudentDto>>> UpdateStudent(UpdateStudentDto updatedStudent){
+            var response = await _studentService.UpdateStudent(updatedStudent);
+            if(response is null){
+                return NotFound(response);
+            }
+            return Ok(response);
+        }
 
+        
     }
 }
