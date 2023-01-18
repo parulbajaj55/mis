@@ -23,7 +23,7 @@ namespace Student.Management.System.Tests.WebAPI.Controller
             _controller = new StudentController(_mockService.Object);
         }
 
-         [Fact]
+        [Fact]
         public async void ShouldReturnListOfAllStudentsWhenCalled()
         {
             var test = new List<GetStudentDto> {new GetStudentDto(), new GetStudentDto() };
@@ -42,7 +42,47 @@ namespace Student.Management.System.Tests.WebAPI.Controller
 
         }
 
-    }
+        [Fact]
+        public async void ShouldDeleteStudentWhenIdIsGiven()
+        {
+             var id = 1;
+             var test = new List<GetStudentDto> {new GetStudentDto(), new GetStudentDto() };
+            _mockService.Setup(s => s.RemoveStudent(id));
 
+            await _controller.RemoveStudent(id);
+            _mockService.Verify(s => s.RemoveStudent(id), Times.Once);
+        }
+        [Fact]
+        public async void ShouldDeleteMultipleStudentWhenIdsAreGiven(){
+            string ids = "1,2,3";
+            var test = new List<GetStudentDto> {new GetStudentDto(), new GetStudentDto(), new GetStudentDto() };
+            _mockService.Setup(s => s.RemoveMultipleStudents(ids));
+
+             await _controller.RemoveMultipleStudents(ids);
+            _mockService.Verify(s => s.RemoveMultipleStudents(ids), Times.Once);
+
+        }
+
+        //  [Fact]
+        // public async void ShouldAddNewStudentWhenCalled(){
+
+        //     var studentList = new List<StudentDetails>();
+
+        //     var studentTest = new AddStudentDto{
+        //         FirstName = "Test Name",
+        //         MiddleName="Test Name",
+        //         LastName="Test Name",
+        //         DateOfBirth= new DateTime(2000,10,10),
+        //         SubjectId = 1
+        //     };
+        //     //  AddStudentDto studentDto=new AddStudentDto();
+        //     // _mockService.Setup(r => r.AddStudent(It.IsAny<AddStudentDto>())).Callback<AddStudentDto>(x => studentDto = x);
+        //     // Task<ActionResult<List<GetStudentDto>>> task = _controller.AddStudent(studentTest);
+
+        //     _mockService.Setup(x => x.AddStudent(studentTest)).Returns(studentList.Add(studentTest));
+
+        // }
+
+    }  
        
 }
