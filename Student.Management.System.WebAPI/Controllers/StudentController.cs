@@ -57,12 +57,10 @@ namespace Student.Management.System.WebAPI.Controllers
         [HttpPut]
         public async Task<ActionResult<List<GetStudentDto>>> UpdateStudent(UpdateStudentDto updatedStudent){
             var response = await _studentService.UpdateStudent(updatedStudent);
-            if(response is null){
-                return NotFound(response);
+            if(response.Id == 0){
+                return NotFound("The student is not present");
             }
             return Ok(response);
         }
-
-        
     }
 }

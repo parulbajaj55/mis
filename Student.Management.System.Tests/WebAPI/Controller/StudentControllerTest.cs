@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Student.Management.System.Application.Services;
+using Student.Management.System.Domain.Dtos.Student;
 using Student.Management.System.Domain.Entities;
 using Student.Management.System.WebAPI.Controllers;
 using Xunit;
@@ -22,37 +23,26 @@ namespace Student.Management.System.Tests.WebAPI.Controller
             _controller = new StudentController(_mockService.Object);
         }
 
-        // [Fact]
-        // public void ShouldReturnListOfAllStudentsWhenCalled()
-        // {
+         [Fact]
+        public async void ShouldReturnListOfAllStudentsWhenCalled()
+        {
+            var test = new List<GetStudentDto> {new GetStudentDto(), new GetStudentDto() };
 
-        //      Task<IEnumerable<StudentDetails>> var = new Task<List<StudentDetails>> {new StudentDetails(), new StudentDetails() };
+            _mockService.Setup( service =>  service.GetAllStudents())
+               .ReturnsAsync((test));
+   
+            var result = await  _controller.GetAll();
+            var actual = (result.Result as OkObjectResult);
+            var okResult = Assert.IsType<OkObjectResult>(actual);
+            var students = Assert.IsType<List<GetStudentDto>>(okResult.Value);
+            Assert.Equal(2, students.Count);
+    
+            Assert.NotNull(actual);
+            Assert.Equal(200, actual.StatusCode);
 
-        //     _mockService.Setup(service => service.GetAllStudents())
-        //         .Returns( new Task<IEnumerable<StudentDetails>>() {new StudentDetails(), new StudentDetails() });
+        }
 
-        //     var result = _controller.GetAll();
-
-        //     var okResult = Assert.IsType<OkObjectResult>(result);
-
-        //     var students = Assert.IsType<List<StudentDetails>>(okResult.Value);
-        //     Assert.Equal(2, students.Count);
-        // }
-
-        
-        // [Fact]
-        // public void ShouldReturnListOfAllStudentsWhenCalled2()
-        // {
-        //     Task<IEnumerable<StudentDetails>> var = new Task<List<StudentDetails>> {new StudentDetails(), new StudentDetails() };
-        //      _mockService.Setup(service => service.GetAllStudents())
-        //         .ReturnsAsync(new List<StudentDetails>() { new StudentDetails(), new StudentDetails() });
-
-        //     var result = _controller.GetAll();
-
-        //     var okResult = Assert.IsType<OkObjectResult>(result);
-
-        //     var students = Assert.IsType<List<StudentDetails>>(okResult.Value);
-        //     Assert.Equal(2, students.Count);
-        // }
     }
+
+       
 }
