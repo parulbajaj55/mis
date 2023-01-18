@@ -49,15 +49,9 @@ namespace Student.Management.System.WebAPI.Controllers
         }
         
        [HttpDelete]
-        public async Task<ActionResult<List<GetStudentDto>>> RemoveStudents(List<int> ids){
+        public async Task<ActionResult<List<GetStudentDto>>> RemoveMultipleStudents([FromQuery] string ids){
 
-                IEnumerable<GetStudentDto> studentList = new List<GetStudentDto>();
-        
-                for(int i =0; i<ids.Count ;i++){
-                    studentList = await _studentService.RemoveStudent(ids.ElementAt(i));
-                }
-           
-            return Ok(studentList);
+            return Ok(await _studentService.RemoveMultipleStudents(ids));
         }
 
         [HttpPut]

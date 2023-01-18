@@ -16,7 +16,7 @@ namespace Student.Management.System.Infrastructure
             CreateMap<StudentDetails,GetStudentDto>();
             CreateMap<AddStudentDto,StudentDetails>();
             CreateMap<UpdateStudentDto,StudentDetails>();
-            CreateMap<HashSet<StudentDetails>,GetStudentDto>();
+          //  CreateMap<HashSet<StudentDetails>,GetStudentDto>();
         }
     }
 }

@@ -37,6 +37,18 @@ namespace Student.Management.System.Application.Services
             return await _studentRepository.RemoveStudent(id);
         }
 
+        public  async Task<IEnumerable<GetStudentDto>> RemoveMultipleStudents(string ids)
+        {
+            List<string > studentIds = ids.Split(',').ToList();
+            
+            IEnumerable<GetStudentDto> studentList = new List<GetStudentDto>();
+            foreach (string id in studentIds)
+            {
+                studentList = await RemoveStudent(int.Parse(id));
+            }
+            return studentList;
+        }
+
         public async Task<GetStudentDto> UpdateStudent(UpdateStudentDto updatedStudent)
         {
             return await _studentRepository.UpdateStudent(updatedStudent);
