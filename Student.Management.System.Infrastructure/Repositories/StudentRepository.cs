@@ -1,5 +1,6 @@
 using System.Linq;
 using AutoMapper;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Student.Management.System.Application.Ports.Out;
 using Student.Management.System.Domain.Dtos.Student;
@@ -13,11 +14,26 @@ namespace Student.Management.System.Infrastructure.Repositories
         private readonly DataContext _context;
 
             private readonly IMapper _mapper;
-        public StudentRepository(DataContext context, IMapper mapper)
+            private readonly DapperContext _dapperContext;
+        public StudentRepository(DataContext context, IMapper mapper,DapperContext dapperContext)
         {
             _context = context;
             _mapper = mapper;
+            _dapperContext=dapperContext;
         }
+
+        public async Task<GetStudentDto> GetStudentById(int id)
+        {
+            var query = "SELECT * FROM students s where s.id = " + id;
+             using (var connection = _dapperContext.CreateConnection())
+            {
+                var studentList = await connection.QueryAsync<StudentDetails>(query);
+                var student =studentList.ToList().First();
+                var result = _mapper.Map<GetStudentDto>(student);
+                return result;
+            }
+        }
+
 
         public async Task<IEnumerable<GetStudentDto>> AddStudent(AddStudentDto newStudent)
         {

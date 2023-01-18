@@ -13,5 +13,7 @@ namespace Student.Management.System.Application.Ports.Out
         public Task<IEnumerable<GetStudentDto>> GetAllStudents();
         public Task<IEnumerable<GetStudentDto>> RemoveStudent(int id);
         public Task<GetStudentDto> UpdateStudent(UpdateStudentDto updatedStudent);
+
+         public Task<GetStudentDto> GetStudentById(int id);
     }
 }

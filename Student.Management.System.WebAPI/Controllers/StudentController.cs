@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Student.Management.System.Application.Services;
 using Student.Management.System.Domain.Dtos.Student;
-using Student.Management.System.Domain.Entities;
 
 // GetAllStudents() - done
 // AddStudent(Student) -done
@@ -37,6 +32,12 @@ namespace Student.Management.System.WebAPI.Controllers
         public async Task<ActionResult<List<GetStudentDto>>> GetAll(){
             return Ok(await _studentService.GetAllStudents());
         }
+
+          [HttpGet("{id}")]
+        public async Task<ActionResult<GetStudentDto>> GetStudentById(int id){
+            return Ok(await _studentService.GetStudentById(id));
+        }
+
 
         [HttpPost]
         public async Task<ActionResult<List<GetStudentDto>>> AddStudent(AddStudentDto newStudent){

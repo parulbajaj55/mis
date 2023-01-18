@@ -53,5 +53,10 @@ namespace Student.Management.System.Application.Services
         {
             return await _studentRepository.UpdateStudent(updatedStudent);
         }
+
+        public async Task<GetStudentDto> GetStudentById(int id)
+        {
+            return await _studentRepository.GetStudentById(id);
+        }
     }
 }
