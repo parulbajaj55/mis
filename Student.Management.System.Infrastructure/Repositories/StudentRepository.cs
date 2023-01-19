@@ -35,13 +35,13 @@ namespace Student.Management.System.Infrastructure.Repositories
         }
 
 
-        public async Task<IEnumerable<GetStudentDto>> AddStudent(AddStudentDto newStudent)
+        public async Task<GetStudentDto> AddStudent(AddStudentDto newStudent)
         {
             var student = _mapper.Map<StudentDetails> (newStudent);
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
 
-            return await GetAllStudents();
+            return _mapper.Map<GetStudentDto>(student);
 
         }
 

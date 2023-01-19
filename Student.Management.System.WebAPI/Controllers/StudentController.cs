@@ -2,12 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Student.Management.System.Application.Services;
 using Student.Management.System.Domain.Dtos.Student;
 
-// GetAllStudents() - done
-// AddStudent(Student) -done
-// UpdateStudentDetails(Student)
-// RemoveStudent(Id)
-// RemoveStudents(Ids)
-// FilterStudent(SubjectId)
 
 namespace Student.Management.System.WebAPI.Controllers
 {
@@ -40,7 +34,7 @@ namespace Student.Management.System.WebAPI.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<List<GetStudentDto>>> AddStudent(AddStudentDto newStudent){
+        public async Task<ActionResult<GetStudentDto>> AddStudent(AddStudentDto newStudent){
             return Ok(await _studentService.AddStudent(newStudent));
         }
 

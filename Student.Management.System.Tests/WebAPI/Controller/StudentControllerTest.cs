@@ -29,7 +29,7 @@ namespace Student.Management.System.Tests.WebAPI.Controller
             var test = new List<GetStudentDto> {new GetStudentDto(), new GetStudentDto() };
 
             _mockService.Setup( service =>  service.GetAllStudents())
-               .ReturnsAsync((test));
+               .ReturnsAsync(test);
    
             var result = await  _controller.GetAll();
             var actual = (result.Result as OkObjectResult);
@@ -63,25 +63,29 @@ namespace Student.Management.System.Tests.WebAPI.Controller
 
         }
 
-        //  [Fact]
-        // public async void ShouldAddNewStudentWhenCalled(){
+         [Fact]
+        public async void ShouldAddNewStudentWhenCalled(){
 
-        //     var studentList = new List<StudentDetails>();
+            AddStudentDto studentDto=new AddStudentDto();
 
-        //     var studentTest = new AddStudentDto{
-        //         FirstName = "Test Name",
-        //         MiddleName="Test Name",
-        //         LastName="Test Name",
-        //         DateOfBirth= new DateTime(2000,10,10),
-        //         SubjectId = 1
-        //     };
-        //     //  AddStudentDto studentDto=new AddStudentDto();
-        //     // _mockService.Setup(r => r.AddStudent(It.IsAny<AddStudentDto>())).Callback<AddStudentDto>(x => studentDto = x);
-        //     // Task<ActionResult<List<GetStudentDto>>> task = _controller.AddStudent(studentTest);
+            var studentTest = new AddStudentDto{
+                FirstName = "Test Name",
+                MiddleName="Test Name",
+                LastName="Test Name",
+                DateOfBirth= new DateTime(2000,10,10),
+                SubjectId = 1
+            };
 
-        //     _mockService.Setup(x => x.AddStudent(studentTest)).Returns(studentList.Add(studentTest));
+             _mockService.Setup(r => r.AddStudent(It.IsAny<AddStudentDto>())).Callback<AddStudentDto>(x => studentDto = x);
+            
+            await _controller.AddStudent(studentTest);
+            _mockService.Verify(x => x.AddStudent(It.IsAny<AddStudentDto>()), Times.Once);
 
-        // }
+            Assert.NotNull(studentDto);
+            Assert.Equal(studentDto.FirstName, studentTest.FirstName);
+            Assert.Equal(studentDto.LastName, studentTest.LastName);
+
+        }
 
     }  
        

@@ -21,7 +21,7 @@ namespace Student.Management.System.Application.Services
             
         }
 
-         public async Task<IEnumerable<GetStudentDto>> AddStudent(AddStudentDto newStudent)
+         public async Task<GetStudentDto> AddStudent(AddStudentDto newStudent)
         {
             return await _studentRepository.AddStudent(newStudent);
         }
