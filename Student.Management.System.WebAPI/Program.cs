@@ -26,7 +26,20 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<ISubjectService, SubjectService>();
 builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
+builder.Services.AddCors(options =>  
+    {  
+      
+    options.AddDefaultPolicy(  
+        policy =>  
+        {  
+            policy.WithOrigins("http://localhost:3000")  
+                .AllowAnyHeader()  
+                .AllowAnyMethod();  
+        });  
+});  
+
 var app = builder.Build();
+app.UseCors();  
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
